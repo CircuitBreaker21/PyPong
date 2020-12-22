@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import pygame
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -32,3 +33,37 @@ class Paddle(pygame.sprite.Sprite):
         self.rect.y += pixel_amount
         if self.rect.y > 400:
             self.rect.y = 400
+=======
+import pygame
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+GREEN = (0, 255, 0)
+RED = (255, 0, 0)
+PURPLE = (51, 0, 111)
+CYAN = (0, 255, 255)
+GOLD = (232,211,162)
+Viking_Blue = (0, 63, 135, 40)
+
+class Paddle(pygame.sprite.Sprite):
+    def __init__(self, color, width, height):
+        pygame.sprite.Sprite.__init__(self)
+
+        self.image = pygame.Surface([width, height])
+        self.image.fill(BLACK)
+        self.image.set_colorkey(BLACK)
+
+        pygame.draw.rect(self.image, color, [0, 0, width, height])
+
+        self.rect = self.image.get_rect()
+
+
+    def moveUp(self, pixel_amount):
+        self.rect.y -= pixel_amount
+        if self.rect.y < 0:
+            self.rect.y = 0
+
+    def moveDown(self, pixel_amount):
+        self.rect.y += pixel_amount
+        if self.rect.y > 400:
+            self.rect.y = 400
+>>>>>>> 59411c8d1117c6788ee7342d4b869d4f0d54883a

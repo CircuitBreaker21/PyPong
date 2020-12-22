@@ -33,7 +33,7 @@ class DropBox2:
                                             "February",
                                             "March",
                                             "April"],
-                                    postcommand=changeMonth(val))
+                                    postcommand=changeMonth(valsdfss))
 
 
         comboExample.grid(column=0, row=1)
