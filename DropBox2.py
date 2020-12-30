@@ -3,39 +3,41 @@ from tkinter import ttk
 
 
 class DropBox2:
-    
-    
-      
+    def __init__(self):
+        self.value = None
 
-    def callbackFunc(event):
-        print("New Element Selected")
-        
+    # def callbackFunc(event):
+    #     print("New Element Selected")
 
     def draw(self):
-        def changeMonth(val):
-            return val
-            comboExample["values"] = ["July",
-                                    "August",
-                                    "September",
-                                    "October"
-                                        ]
+
+        def callback():
+            self.value = n.get()
+            app.destroy()
+
+        # def changeMonth():
+        #     comboExample["values"] = ["July",
+        #                               "August",
+        #                               "September",
+        #                               "October"]
+
 
         app = tk.Tk()
-        app.geometry('200x100')
+        app.geometry('300x100')
 
         labelTop = tk.Label(app,
-                            text = "Choose your favourite month")
+                            text = "Choose your key commands")
         labelTop.grid(column=0, row=0)
-
-        comboExample = ttk.Combobox(app, 
+        n = tk.StringVar()
+        comboExample = ttk.Combobox(app,
                                     values=[
-                                            "January", 
-                                            "February",
-                                            "March",
-                                            "April"],
-                                    postcommand=changeMonth(valsdfss))
-
+                                        ' Q A',
+                                        ' E D',
+                                        ' O L',
+                                        ' UP DOWN'], textvariable=n)
 
         comboExample.grid(column=0, row=1)
+        button = ttk.Button(app, text="Submit", command=callback)
+        button.grid(column=1, row=1)
 
         app.mainloop()
