@@ -23,43 +23,43 @@ Viking_Blue = (0, 63, 135, 40)
 
 playerColors = [PURPLE, Viking_Blue, GOLD, RED]
 playerLocations = [[20, 200], [680, 200]]
+paddle_ups = {}
+paddle_downs = {}
  
 pygame.init()
 
 
-# Creating tkinter window
-window = tk.Tk()
-window.geometry('350x100')
-# Label
-ttk.Label(window, text="Select Player Count :",
-          font=("Times New Roman", 10)).grid(column=0,
-                                             row=15, padx=10, pady=25)
+players = DropBox2([' 2',
+                    ' 4 (Singles)',
+                    ' 4 (Duos)'])
 
-n = tk.StringVar()
-playerCount = ttk.Combobox(window, width=27,
-                           textvariable=n)
+players.draw()
+num_players = int(players.value[1])
 
-# Adding combobox drop down list
-playerCount['values'] = (' 2',
-                         ' 4 (Singles)',
-                         ' 4 (Duos)',)
 
-playerCount.grid(column=1, row=15)
-
-# Shows february as a default value
-playerCount.current()
-window.mainloop()
-num_players = 2
-
-db = DropBox2()
-db.draw()
-
-print(db.value)
+c_options = [
+    ' Q A',
+    ' E D',
+    ' O L',
+    ' W S',
+    ' U J',
+    ' ↑ ↓']
 for i in range(0, num_players):
-    paddle_ups = {pygame.key.key_code(str(db.value[1])): str(i)}
-    paddle_downs = {pygame.key.key_code(str(db.value[3])): str(i)}
+    controls = DropBox2(c_options)
+    controls.draw()
 
-
+    print(controls.value)
+    if(controls.value[1] == '↑'):
+        paddle_ups.update(
+            {pygame.K_UP: str(i)})
+        paddle_downs.update(
+            {pygame.K_DOWN: str(i)})
+    else:
+        paddle_ups.update(
+            {pygame.key.key_code(str(controls.value[1])): str(i)})
+        paddle_downs.update(
+            {pygame.key.key_code(str(controls.value[3])): str(i)})
+    c_options.remove(controls.value)
 
 
 # Set the width and height of the screen [width, height]
@@ -124,13 +124,15 @@ while not done:
 
         # player A scored
     if (ball.rect.x > width):
-        ball.reset()
+        goLeft = True
+        ball.reset(goLeft)
         scoreA += 1
         
 
         # player B Scored
     if (ball.rect.x < 0):
-        ball.reset()
+        goLeft = False
+        ball.reset(goLeft)
         scoreB += 1
 
     # Detect collisions between the ball and the paddles

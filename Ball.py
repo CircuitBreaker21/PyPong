@@ -33,7 +33,11 @@ class Ball(pygame.sprite.Sprite):
     def bounceY(self):
         self.velocity[1] = -self.velocity[1]
 
-    def reset(self):
-        self.velocity = [r.randint(2, 6), r.randint(-8, 8)]
+    def reset(self, goLeft):
+        self.velocity = [r.randint(4, 6), r.randint(-8, 8)]
+
+        if(goLeft):
+            self.velocity[0] = -self.velocity[0]
+
         self.rect.x = 345
         self.rect.y = 195

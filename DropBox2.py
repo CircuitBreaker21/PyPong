@@ -3,8 +3,9 @@ from tkinter import ttk
 
 
 class DropBox2:
-    def __init__(self):
+    def __init__(self, options):
         self.value = None
+        self.options = options
 
     # def callbackFunc(event):
     #     print("New Element Selected")
@@ -30,11 +31,7 @@ class DropBox2:
         labelTop.grid(column=0, row=0)
         n = tk.StringVar()
         comboExample = ttk.Combobox(app,
-                                    values=[
-                                        ' Q A',
-                                        ' E D',
-                                        ' O L',
-                                        ' UP DOWN'], textvariable=n)
+                                    values=self.options, textvariable=n)
 
         comboExample.grid(column=0, row=1)
         button = ttk.Button(app, text="Submit", command=callback)
